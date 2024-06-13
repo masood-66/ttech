@@ -1422,3 +1422,57 @@
 
 
 })(jQuery);
+
+
+//background music//
+// Create the audio element and add it to the body if it doesn't exist
+function createAudioElement() {
+    let audio = document.getElementById('background-music');
+    if (!audio) {
+      audio = document.createElement('audio');
+      audio.id = 'background-music';
+      audio.loop = true;
+      audio.src = './assets/audio/Echoes Through History.wav'; // Update this path to your audio file
+      document.body.appendChild(audio);
+  
+      // Ensure the audio element has the correct play state
+      if (sessionStorage.getItem('isPlaying') === 'true') {
+        audio.play().catch(error => {
+          console.log('Autoplay was prevented:', error);
+        });
+      }
+    }
+    return audio;
+  }
+  
+  // Handle visibility change to play/pause audio
+  function handleVisibilityChange(audio) {
+    if (document.hidden) {
+      audio.pause();
+    } else {
+      audio.play().catch(error => {
+        console.log('Autoplay was prevented:', error);
+      });
+    }
+  }
+  
+  // Initialize the audio and event listeners
+  function initAudio() {
+    const audio = createAudioElement();
+  
+    // Event listeners for play/pause to update sessionStorage
+    audio.addEventListener('play', () => {
+      sessionStorage.setItem('isPlaying', 'true');
+    });
+  
+    audio.addEventListener('pause', () => {
+      sessionStorage.setItem('isPlaying', 'false');
+    });
+  
+    // Handle page visibility changes
+    document.addEventListener('visibilitychange', () => handleVisibilityChange(audio));
+  }
+  
+  // Call the initAudio function on DOMContentLoaded
+  document.addEventListener('DOMContentLoaded', initAudio);
+  
