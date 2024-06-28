@@ -1,3 +1,37 @@
+<?php
+session_start();
+
+$conn = new mysqli("localhost", "root", "", "ttech");
+
+if($conn===false){
+    die("connection falied");
+}
+
+if(isset($_POST['enroll'])){
+$fname=$_POST['first_name'];
+$lname=$_POST['last_name'];
+$email=$_POST['email'];
+$phoneno=$_POST['phoneno'];
+
+$course=$_POST['course'];
+
+$branch=$_POST['branch'];
+
+$sql="INSERT INTO enroll_student(first_name,last_name,email,phoneno,course,branch) 
+VALUES('$fname','$lname','$email','$phoneno','$course','$branch')";
+
+$result=mysqli_query($conn,$sql);
+if($result){
+   
+    header("location:enroll_students.php");
+}else{
+    echo"Apply failed";
+
+}
+}
+
+
+?>
 <!doctype html>
 <html lang="zxx">
 
@@ -460,71 +494,66 @@
                 <div class="contact__form-inner">
                     <h3>Enroll Now</h3>
                     <p>Enroll in the top demanding courses</p>
-                    <form class="contact__form-form" action="#">
-                        <div class="row">
-                            <div class="col-lg-6 col-md-6">
-                                <div class="contact__form-field">
-                                    <label for="fname">First Name<span class="invite-text-gr-color">*</span></label>
-                                    <input type="text" name="fname" id="fname" placeholder="first name" required>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6">
-                                <div class="contact__form-field">
-                                    <label for="lname">Last Name<span class="invite-text-gr-color">*</span></label>
-                                    <input type="text" name="lname" id="lname" placeholder="last name">
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6">
-                                <div class="contact__form-field">
-                                    <label for="email">Email Address<span class="invite-text-gr-color">*</span></label>
-                                    <input type="email" name="email" id="email" placeholder="email address" required>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6">
-                                <div class="contact__form-field">
-                                    <label for="email">Mobile Number<span class="invite-text-gr-color">*</span></label>
-                                    <input type="tel" name="Number" id="Number" placeholder="Phone Number">
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6">
-                                <div class="contact__form-field">
-                                    <label for="select">Course*<span class="invite-text-gr-color">*</span></label>
-                                    <select name="select" id="select">
-                                        <option value="0">select Course</option>
-                                        <option value="1">Web Development</option>
-                                        <option value="2">UI/UX Designing</option>
-                                        <option value="3">Digital Marketing</option>
-                                        <option value="4">Artificial Inteligence</option>
-                                        <option value="5">Graphic Designing</option>
-                                        <option value="6">Accounting & Bookkeeping</option>
-                                        <option value="7">E-Commerce</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6">
-                                <div class="contact__form-field">
-                                    <label for="select">Branch*<span class="invite-text-gr-color">*</span></label>
-                                    <select name="select" id="select" required>
-                                        <option value="0">select Branch</option>
-                                        <option value="1">FLH Jutial, Gilgit</option>
-                                        <option value="2">STP Konodas, Gilgit</option>
-                                    
-                                    </select>
-                                </div>
-                            </div>
-                            <!-- <div class="col-lg-12">
-                                <div class="contact__form-field">
-                                    <label for="message">Your Messages*<span class="invite-text-gr-color">*</span></label>
-                                    <textarea name="message" id="message" cols="30" rows="10" placeholder="type your messages here..."></textarea>
-                                </div>
-                            </div> -->
-                            <div class="col-lg-12">
-                                <div class="contact__form__btn">
-                                    <button class="thm-btn thm-btn__gradient" type="submit">Enroll Now</button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
+                    <form class="contact__form-form" method="POST" action="#">
+                      <div class="row">
+                          <div class="col-lg-6 col-md-6">
+                              <div class="contact__form-field">
+                                  <label for="fname">First Name<span class="invite-text-gr-color">*</span></label>
+                                  <input type="text" name="first_name" id="fname" placeholder="first name" required>
+                              </div>
+                          </div>
+                          <div class="col-lg-6 col-md-6">
+                              <div class="contact__form-field">
+                                  <label for="lname">Last Name<span class="invite-text-gr-color">*</span></label>
+                                  <input type="text" name="last_name" id="lname" placeholder="last name">
+                              </div>
+                          </div>
+                          <div class="col-lg-6 col-md-6">
+                              <div class="contact__form-field">
+                                  <label for="email">Email Address<span class="invite-text-gr-color">*</span></label>
+                                  <input type="email" name="email" id="email" placeholder="email address" required>
+                              </div>
+                          </div>
+                          <div class="col-lg-6 col-md-6">
+                              <div class="contact__form-field">
+                                  <label for="email">Mobile Number<span class="invite-text-gr-color">*</span></label>
+                                  <input type="tel" name="phoneno" id="Number" placeholder="Phone Number">
+                              </div>
+                          </div>
+                          <div class="col-lg-6 col-md-6">
+                              <div class="contact__form-field">
+                                  <label for="select">Course*<span class="invite-text-gr-color">*</span></label>
+                                  <select name="course" id="select">
+                                      <option >select Course</option>
+                                      <option >Web Development</option>
+                                      <option >UI/UX Designing</option>
+                                      <option >Digital Marketing</option>
+                                      <option >Artificial Inteligence</option>
+                                      <option >Graphic Designing</option>
+                                      <option >Accounting & Bookkeeping</option>
+                                      <option >E-Commerce</option>
+                                  </select>
+                              </div>
+                          </div>
+                          <div class="col-lg-6 col-md-6">
+                              <div class="contact__form-field">
+                                  <label for="select">Branch*<span class="invite-text-gr-color">*</span></label>
+                                  <select name="branch" id="select" required>
+                                      <option >select Branch</option>
+                                      <option >FLH Jutial, Gilgit</option>
+                                      <option >STP Konodas, Gilgit</option>
+                                  
+                                  </select>
+                              </div>
+                          </div>
+                         
+                          <div class="col-lg-12">
+                              <div class="contact_form_btn">
+                                  <button class="thm-btn thm-btn__gradient" name="enroll" type="submit">Enroll Now</button>
+                              </div>
+                          </div>
+                      </div>
+                  </form>
                 </div>
             </div>
    

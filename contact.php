@@ -1,3 +1,35 @@
+<?php
+session_start();
+
+$conn = new mysqli("localhost", "root", "", "ttech");
+
+if($conn===false){
+    die("connection falied");
+}
+
+if(isset($_POST['apply'])){
+$fname=$_POST['first_name'];
+$lname=$_POST['last_name'];
+$email=$_POST['email'];
+$field=$_POST['field'];
+
+$message=$_POST['message'];
+
+$sql="INSERT INTO contacts(first_name,last_name,email,field,message) 
+VALUES('$fname','$lname','$email','$field','$message')";
+
+$result=mysqli_query($conn,$sql);
+if($result){
+   
+    header("location:contact.php");
+}else{
+    echo"Apply failed";
+
+}
+}
+
+?>
+
 <!doctype html>
 <html lang="zxx">
 
@@ -515,53 +547,54 @@
                             <div class="contact__form-inner">
                                 <h3>Keep In Touch</h3>
                                 <p>With over 2+ of experience, we’ve established ourselves as one of the pioneering agencies in the region. Our small, flexible, agile and design-led structures and processes.</p>
-                                <form class="contact__form-form" action="#">
-                                    <div class="row">
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="contact__form-field">
-                                                <label for="fname">Fast Name<span class="invite-text-gr-color">*</span></label>
-                                                <input type="text" name="fname" id="fname" placeholder="first name">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="contact__form-field">
-                                                <label for="lname">Last Name<span class="invite-text-gr-color">*</span></label>
-                                                <input type="text" name="lname" id="lname" placeholder="last name">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="contact__form-field">
-                                                <label for="email">Email Address<span class="invite-text-gr-color">*</span></label>
-                                                <input type="email" name="email" id="email" placeholder="email address">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="contact__form-field">
-                                                <label for="select">Services*<span class="invite-text-gr-color">*</span></label>
-                                                <select name="select" id="select">
-                                                    <option value="0">select services</option>
-                                                    <option value="1">Web Designer</option>
-                                                    <option value="2">UI/UX Designer</option>
-                                                    <option value="3">Digital Marketer</option>
-                                                    <option value="4">Support Engineer</option>
-                                                    <option value="5">Support Engineer</option>
-                                                    <option value="6">Web Developer</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-12">
-                                            <div class="contact__form-field">
-                                                <label for="message">Your Messages*<span class="invite-text-gr-color">*</span></label>
-                                                <textarea name="message" id="message" cols="30" rows="10" placeholder="type your messages here..."></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-12">
-                                            <div class="contact__form__btn">
-                                                <button class="thm-btn thm-btn__gradient" type="submit">Send Messages</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
+                                <form class="contact__form-form" method="POST" action="#">
+                                  <div class="row">
+                                      <div class="col-lg-6 col-md-6">
+                                          <div class="contact__form-field">
+                                              <label for="fname">First Name<span class="invite-text-gr-color">*</span></label>
+                                              <input type="text" required name="first_name" id="fname" placeholder="first name">
+                                          </div>
+                                      </div>
+                                      <div class="col-lg-6 col-md-6">
+                                          <div class="contact__form-field">
+                                              <label for="lname">Last Name<span class="invite-text-gr-color">*</span></label>
+                                              <input type="text" required name="last_name" id="lname" placeholder="last name">
+                                          </div>
+                                      </div>
+                                      <div class="col-lg-6 col-md-6">
+                                          <div class="contact__form-field">
+                                              <label for="email">Email Address<span class="invite-text-gr-color">*</span></label>
+                                              <input type="email" required name="email" id="email" placeholder="email address">
+                                          </div>
+                                      </div>
+                                      <div class="col-lg-6 col-md-6">
+                                          <div class="contact__form-field">
+                                              <label for="select">Services*<span class="invite-text-gr-color">*</span></label>
+                                              <select name="field" required id="select">
+                                                  <option >select services</option>
+                                                  <option >Web Designer</option>
+                                                  <option >UI/UX Designer</option>
+                                                  <option >Digital Marketer</option>
+                                                  <option >Support Engineer</option>
+                                                  <option >Support Engineer</option>
+                                                  <option >Web Developer</option>
+                                              </select>
+                                          </div>
+                                      </div>
+                                      <div class="col-lg-12">
+                                          <div class="contact__form-field">
+                                              <label for="message">Your Messages*<span class="invite-text-gr-color">*</span></label>
+                                              <textarea name="message" id="message" cols="30" rows="10" placeholder="type your messages here..."></textarea>
+                                          </div>
+                                      </div>
+                                      <div class="col-lg-12">
+                                          <div class="contact_form_btn">
+                                              <button class="thm-btn thm-btn__gradient" name="apply" type="submit">Send Messages</button>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </form>
+
                             </div>
                         </div>
                     </div>
