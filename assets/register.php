@@ -23,7 +23,7 @@ VALUES('$fname','$lname','$email','$phoneno','$course','$branch')";
 $result=mysqli_query($conn,$sql);
 if($result){
    
-    header("location:enroll_students.php");
+    header("location:register.php");
 }else{
     echo"Apply failed";
 
@@ -539,9 +539,10 @@ if($result){
                               <div class="contact__form-field">
                                   <label for="select">Branch*<span class="invite-text-gr-color">*</span></label>
                                   <select name="branch" id="select" required>
-                                      <option >select Branch</option>
-                                      <option >FLH Jutial, Gilgit</option>
-                                      <option >STP Konodas, Gilgit</option>
+                                      <option  >select Branch</option>
+                                      <option value="1">FLH Jutial, Gilgit</option>
+                                      <option value="2">Zulfiqarabad Jutial, Gilgit</option>
+                                      <option value="3" >STP Konodas, Gilgit</option>
                                   
                                   </select>
                               </div>

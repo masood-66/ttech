@@ -74,7 +74,7 @@
                     <a href="https://wa.me/+923555056504">Live Chat</a>
                   </li>
                   <li><a href="contact.html">Support</a></li>
-                  <li><a href="contact.html">Contact</a></li>
+                  <li><a href="contact.php">Contact</a></li>
                 </ul>
                 <div class="header__social ul_li">
                   <a href="#!"><i class="fa fa-facebook-f"></i></a>
@@ -108,7 +108,7 @@
               </div>
               <div class="col-lg-5 col-md-5">
                 <div class="header__button text-end">
-                  <a href="contact.html" class="thm-btn thm-btn__white">
+                  <a href="contact.php" class="thm-btn thm-btn__white">
                     <span class="btn-anim-wrap">
                       <span class="button-text">Contact us!</span>
                       <span class="button-text">Contact us!</span>
@@ -201,7 +201,7 @@
                     ></a>
                     <ul class="submenu">
                       <li>
-                        <a href="web.html"><span>web development</span></a>
+                        <a href="web.php"><span>web development</span></a>
                       </li>
                       <li>
                         <a href="ai.html"><span>Ai</span></a>
@@ -318,7 +318,7 @@
               >Dribbble</a
             >
             <br><br>
-          <a href="#">Admin Login</a>
+          <a href="./assets/login.php">Admin Login</a>
           </div>
         </div>
         <!-- sidebar-info end -->
